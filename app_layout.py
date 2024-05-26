@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
 
-def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=5000):
+def create_app(update_interval_ms=5000):
 
     # Initialize the Dash app
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
@@ -21,14 +21,14 @@ def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=5000):
                 id='lat-input',
                 placeholder='Latitude (deg)',
                 type='number',
-                value=orig_lat,
+                value=0.0,
                 style={'display': 'inline-block'}, #'width': '49%', 
             ),
             dcc.Input(
                 id='lon-input',
                 placeholder='Longitude (deg)',
                 type='number',
-                value=orig_lon,
+                value=0.0,
                 style={'display': 'inline-block'},
             ),
             html.Plaintext(
@@ -39,7 +39,7 @@ def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=5000):
                 id='zoom-input',
                 placeholder='Zoom (factor)',
                 type='number',
-                value=zoom_factor,
+                value=10,
                 style={'display': 'inline-block'},
             ),
         ]),
