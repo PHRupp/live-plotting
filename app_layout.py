@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 from dash import dcc, html
 from dash_bootstrap_templates import load_figure_template
 
-def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=500):
+def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=5000):
 
     # Initialize the Dash app
     app = dash.Dash(__name__, external_stylesheets=[dbc.themes.DARKLY])
@@ -49,7 +49,7 @@ def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=500):
                 id="live-geo-plot",
                 style={
                     'display': 'inline-block',
-                    'width': '100vf',
+                    'width': '50%',
                     'height': '100vf',
                 }
             ),
@@ -58,7 +58,7 @@ def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=500):
                 animate=True,
                 style={
                     'display': 'inline-block',
-                    'width': '100vf',
+                    'width': '50%',
                     'height': '100vf',
                 }
             ),
@@ -68,6 +68,8 @@ def create_app(orig_lat, orig_lon, zoom_factor = 10, update_interval_ms=500):
             interval=update_interval_ms,
             n_intervals=0,
         ),
+        dcc.Store(id="state-data"),
+        dcc.Store(id="config-data"),
     ])
     
     return app
